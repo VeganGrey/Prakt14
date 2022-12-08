@@ -151,6 +151,16 @@ namespace Prakt13
             Masssiv.ConfigDoubleOpenMassiv(ref matrica);
             nachl.ItemsSource = VisualArray.ToDataTable(matrica).DefaultView;
         }
+
+        private void Закрытие(object sender, CancelEventArgs e)
+        {
+            MessageBoxResult res = MessageBox.Show("Вы уверены?", "Закрытие окна", MessageBoxButton.YesNo, MessageBoxImage.Asterisk, MessageBoxResult.Yes);
+            if(res == MessageBoxResult.Yes)
+            {
+                this.Close();
+            }
+            else { e.Cancel = true; }
+        }
     }
 
     public static class pass
