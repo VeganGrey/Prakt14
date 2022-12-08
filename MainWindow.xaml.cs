@@ -20,6 +20,7 @@ using System.Windows.Markup;
 using System.Windows.Threading;
 using System.Windows.Diagnostics;
 using LibMas;
+using System.IO;
 
 namespace Prakt13
 {
@@ -44,10 +45,25 @@ namespace Prakt13
             timer.Tick += new EventHandler(this.Timer_Tick);
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
             timer.IsEnabled = true;
+            if (File.Exists(".\\config.ini"))
+            {
+                Masssiv.ConfigDoubleOpenMassiv(ref matrica);
+                nachl.ItemsSource = VisualArray.ToDataTable(matrica).DefaultView;
+            }
+            else
+            {
+                matrica = new double[0, 0];
+
+            }
         }
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if(pass.Data != 123) 
+            if(pass.Data != "123" || pass.Data == null)
+            {
+                PassWindow pass = new PassWindow();
+                pass.Owner = this;
+                pass.ShowDialog();
+            }   
             DateTime now = DateTime.Now;
             time.Text = now.ToString("HH:mm:ss");
             data.Text = now.ToString("dd.MM.yyyy");
@@ -56,7 +72,7 @@ namespace Prakt13
             else indx.Text = "0";
         }
 
-        double[,] matrica = new double[0,0];
+        double[,] matrica;
         double[,] rematr;
 
         private void Spavka(object sender, RoutedEventArgs e)
@@ -126,10 +142,19 @@ namespace Prakt13
             LibMas.Masssiv.DVDoubleOpenMassiv(ref matrica);
             nachl.ItemsSource = VisualArray.ToDataTable(matrica).DefaultView;
         }
+
+        private void OpenSettings(object sender, RoutedEventArgs e)
+        {
+            Settings set = new Settings();
+            set.Owner = this;
+            set.ShowDialog();
+            Masssiv.ConfigDoubleOpenMassiv(ref matrica);
+            nachl.ItemsSource = VisualArray.ToDataTable(matrica).DefaultView;
+        }
     }
 
     public static class pass
     {
-        public static int Data;
+        public static string Data;
     }
 }

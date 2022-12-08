@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
+﻿using Microsoft.Win32;
+using System;
 using System.Data;
 using System.IO;
-using Microsoft.Win32;
 
 namespace LibMas
 {
@@ -103,22 +97,22 @@ namespace LibMas
         /// <param name="j">Кол-во столбцов в создаваемой матрице</param>
         /// <param name="max">Верхний предел для генерации случайных чисел,нужных для заполнения матрицы</param>
         /// <returns>Заполненная матрица с определенным кол-вом строк и столбцов</returns>
-        public static int[,] DVZapol(int i,int j,int max)
+        public static int[,] DVZapol(int i, int j, int max)
         {
             int[,] mas = new int[i, j];
             Random rnd = new Random();
-            for (i = 0; i< mas.GetLength(0);i++)
-                for (j= 0; j< mas.GetLength(1);j++)
-                    mas[i,j] = rnd.Next(-max,max);
+            for (i = 0; i < mas.GetLength(0); i++)
+                for (j = 0; j < mas.GetLength(1); j++)
+                    mas[i, j] = rnd.Next(-max, max);
             return mas;
         }
 
-        public static void DvDoubleZapol(int max,ref double[,]matr)
+        public static void DvDoubleZapol(int max, ref double[,] matr)
         {
             Random rnd = new Random();
             for (int i = 0; i < matr.GetLength(0); i++)
                 for (int j = 0; j < matr.GetLength(1); j++)
-                    matr[i, j] = rnd.Next(-max,max);
+                    matr[i, j] = rnd.Next(-max, max);
         }
 
         public static void clearmatrica(ref double[,] matr)
@@ -146,7 +140,7 @@ namespace LibMas
                 {
                     for (int j = 0; j < mas.GetLength(1); j++)
                     {
-                        file.WriteLine(mas[i,j]);
+                        file.WriteLine(mas[i, j]);
                     }
                 }
                 file.Close();
@@ -176,6 +170,31 @@ namespace LibMas
             }
         }
 
+        public static void ConfigDoubleSaveMassiv(int row, int column)
+        {
+            StreamWriter file = new StreamWriter(".\\config.ini");
+            file.WriteLine(row);
+            file.WriteLine(column);
+            file.Close();
+        }
+
+        public static void ConfigDoubleOpenMassiv(ref double[,] mas)
+        {
+            StreamReader file = new StreamReader(".\\config.ini");
+            int rows = Convert.ToInt32(file.ReadLine());
+            int columns = Convert.ToInt32(file.ReadLine());
+            mas = null;
+            mas = new double[rows, columns];
+            for (int i = 0; i < mas.GetLength(0); i++)
+            {
+                for (int j = 0; j < mas.GetLength(1); j++)
+                {
+                    mas[i, j] = 0;
+                }
+            }
+            file.Close();
+        }
+
         public static void DVDoubleOpenMassiv(ref double[,] mas)
         {
             OpenFileDialog open = new OpenFileDialog();
@@ -199,12 +218,12 @@ namespace LibMas
                 file.Close();
             }
         }
-            /// <summary>
-            /// Функция для записи в передаваемую матрицу новых значений из открытого уже существующего файла из корневой системы Windows
-            /// </summary>
-            /// <param name="mas">Матрица со значениями для записи в неё новых значений</param>
-            public static void DVOpenMassiv(ref int[,] mas)
-            {
+        /// <summary>
+        /// Функция для записи в передаваемую матрицу новых значений из открытого уже существующего файла из корневой системы Windows
+        /// </summary>
+        /// <param name="mas">Матрица со значениями для записи в неё новых значений</param>
+        public static void DVOpenMassiv(ref int[,] mas)
+        {
             OpenFileDialog open = new OpenFileDialog();
             open.DefaultExt = ".txt";
             open.Filter = "Все файлы (*.*) | *.* | Текстовые файлы | *.txt";
@@ -215,7 +234,7 @@ namespace LibMas
                 StreamReader file = new StreamReader(open.FileName);
                 int rows = Convert.ToInt32(file.ReadLine());
                 int columns = Convert.ToInt32(file.ReadLine());
-                mas = new int[rows,columns];
+                mas = new int[rows, columns];
                 for (int i = 0; i < mas.GetLength(0); i++)
                 {
                     for (int j = 0; j < mas.GetLength(1); j++)

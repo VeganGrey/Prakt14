@@ -21,6 +21,7 @@
                 <MenuItem Header="Изменить матрицу" FontFamily="Cascadia Code" Click="Rechange"/>
                 <MenuItem Header="Очистка" FontFamily="Cascadia Code" Click="Clear_Click"></MenuItem>
             </MenuItem>
+            <MenuItem Header="Настройки" Click="OpenSettings"></MenuItem>
             <MenuItem Header="О программе" FontFamily="Cascadia Code" Click="Spavka"></MenuItem>
             <MenuItem Header="Тех.Поддержка" FontFamily="Cascadia Code" Click="Support"></MenuItem>
             <MenuItem Header="Выход" FontFamily="Cascadia Code" Height="16" Click="Quit"></MenuItem>

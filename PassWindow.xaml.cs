@@ -46,7 +46,7 @@ namespace Prakt13
 
         private void Закрытие(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            pass.Data = Convert.ToInt32(Pass.Password);
+            pass.Data = Pass.Password;
         }
     }
 }

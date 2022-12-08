@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Prakt13"
         mc:Ignorable="d"
-        Title="Введите пароль" Height="107" Width="210" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" Activated="Window_Activated" Closing="Закрытие">
+        Title="Введите пароль" Height="113" Width="221" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" Activated="Window_Activated" Closing="Закрытие">
     <StackPanel>
         <PasswordBox x:Name="Pass" HorizontalAlignment="Center" VerticalAlignment="Top" Width="210" Height="26"/>
-        <Button Content="Войти" Width="210" Height="25" Click="LetsGoooo"/>
+        <Button Content="Войти" Width="210" Height="25" Click="LetsGoooo" IsDefault="True"/>
         <Button Content="Отмена" HorizontalAlignment="Center" Margin="0,0,0,0" Width="210" Height="35" Click="Cancel"/>
     </StackPanel>
 </Window>
